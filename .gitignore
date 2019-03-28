@@ -1,0 +1,7 @@
+Library/AnnotationManager
+Library
+Logs
+obj
+.vs
+examples.sln
+*.csproj
