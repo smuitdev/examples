@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc7f798ea831cf45898d14584b5321f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ImpactEffect: {fileID: 958208697792588564, guid: 78ae5eb3808e4d64f8957d891f371906,
+    type: 3}
   m_Lifetime: 2
   m_StartVelocity: 100
 --- !u!114 &6384479143791774434

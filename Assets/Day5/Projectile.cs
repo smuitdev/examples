@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private ImpactEffect m_ImpactEffect;
+
     /// <summary>
     /// время жизни снаряда
     /// </summary>
@@ -24,6 +26,8 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+        CheckCollide();
+
         // полет снаряда
         transform.position += transform.forward * m_StartVelocity *Time.deltaTime;
 
@@ -33,8 +37,29 @@ public class Projectile : MonoBehaviour
         
         if (m_Timer > m_Lifetime)
         {
-            //Destroy(gameObject);
             PoolManager.Instance.Unspawn(gameObject);
         }
+    }
+
+    private void Explode()
+    {
+        if(m_ImpactEffect != null)
+        {
+            var impact = PoolManager.Instance.Spawn(m_ImpactEffect.gameObject);
+
+            impact.transform.position = transform.position;
+        }
+
+        PoolManager.Instance.Unspawn(gameObject);
+    }
+
+    private void CheckCollide()
+    {
+        RaycastHit rayHit;
+
+        bool hit = Physics.Raycast(transform.position, transform.forward, out rayHit, m_StartVelocity * Time.deltaTime);
+
+        if (hit)
+            Explode();
     }
 }
